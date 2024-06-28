@@ -18,12 +18,13 @@ import com.qc.testng.utils.TestUtil;
 public class BaseIntegration {
 
 	WebDriver driver;
-	WebElement email, pass, signin, logout;
+	WebElement email, pass, signin, logout, registerPageLink;
+	WebElement rName, rMobile, rEmail, rPass, rSubmit;
 	TestUtil test = new TestUtil();
 	Properties prop;
 	String tName;
 	
-	@BeforeSuite
+	
 	public void doSetup() throws IOException {
 		prop = test.readProp();
 		if(prop.getProperty("browser").equals("chrome")) {
@@ -43,8 +44,9 @@ public class BaseIntegration {
 		return test.readExcelData("Sheet1");
 	}
 	
-	@AfterSuite
-	public void tearDown() {
-		driver.close();
+	@DataProvider
+	public Object[][] registerData() throws IOException{
+		return test.readExcelData("Sheet2");
 	}
+	
 }
