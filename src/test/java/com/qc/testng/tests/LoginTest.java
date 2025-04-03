@@ -1,12 +1,21 @@
 package com.qc.testng.tests;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseIntegration{
+	
+	@BeforeSuite
+	public void setup() throws IOException {
+		doSetup();
+	}
 	
 	@BeforeMethod
 	public void locateElement() {
@@ -28,12 +37,11 @@ public class LoginTest extends BaseIntegration{
 	@AfterMethod
 	public void doAssert() throws InterruptedException {
 		String actResult = driver.getTitle();
-		String expResult;
 		if(tName.equals("Both are valid")) {
 			expResult = "Queue Codes | Dashboard";
 			doLogout();
 		}else {
-			expResult = "Queue Codes | Log in";
+			expResult = loginPageTitle;
 		}
 		Assert.assertEquals(actResult, expResult);
 		Thread.sleep(2000);
@@ -42,5 +50,10 @@ public class LoginTest extends BaseIntegration{
 	public void doLogout() {
 		logout = driver.findElement(By.id("hlogout"));
 		logout.click();
+	}
+	
+	@AfterSuite
+	public void tearDown() {
+		driver.close();
 	}
 }

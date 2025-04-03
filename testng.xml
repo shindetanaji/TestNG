@@ -4,6 +4,7 @@
   <test thread-count="5" name="Test">
     <classes>
       <class name="com.qc.testng.tests.LoginTest"/>
+      <class name="com.qc.testng.tests.RegisterTest"/>
     </classes>
   </test> <!-- Test -->
   <listeners>

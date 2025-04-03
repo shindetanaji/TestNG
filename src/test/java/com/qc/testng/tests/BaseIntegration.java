@@ -9,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import com.qc.testng.utils.TestUtils;
@@ -18,12 +16,13 @@ import com.qc.testng.utils.TestUtils;
 public class BaseIntegration {
 
 	WebDriver driver;
-	WebElement email, pass, signin, logout;
+	WebElement email, pass, signin, logout, regPageLink;
+	WebElement rName, rMobile, rEmail, rPass, rSubmit;
 	Properties prop;
 	TestUtils test = new TestUtils();
-	String tName;
+	String tName, actResult, expResult;
+	String loginPageTitle = "Queue Codes | Log in";
 	
-	@BeforeSuite
 	public void doSetup() throws IOException {
 		prop = test.readProp();
 		if(prop.getProperty("browser").equals("chrome")) {
@@ -43,8 +42,8 @@ public class BaseIntegration {
 		return test.readExcelData("Sheet1");
 	}
 	
-	@AfterSuite
-	public void tearDown() {
-		driver.close();
+	@DataProvider
+	public Object[][] registerData() throws IOException{
+		return test.readExcelData("Sheet2");
 	}
 }
