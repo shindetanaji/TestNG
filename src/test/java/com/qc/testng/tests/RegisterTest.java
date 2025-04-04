@@ -53,7 +53,7 @@ public class RegisterTest extends BaseIntegration {
 	@AfterMethod
 	public void doAssert() throws InterruptedException {
 		if (tName.equals("All are valid")) {
-			actResult = handleAlert();
+			actResult = cf.handleAlert(driver);
 			expResult = "User registered successfully.";
 		} else {
 			actResult = driver.getTitle();
@@ -61,13 +61,6 @@ public class RegisterTest extends BaseIntegration {
 		}
 		Assert.assertEquals(actResult, expResult);
 		Thread.sleep(2000);
-	}
-
-	public String handleAlert() {
-		Alert alt = driver.switchTo().alert();
-		actResult = alt.getText();
-		alt.accept();
-		return actResult;
 	}
 	
 	@AfterSuite

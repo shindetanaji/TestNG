@@ -3,7 +3,6 @@ package com.qc.testng.tests;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -20,18 +19,16 @@ public class LoginTest extends BaseIntegration{
 	@BeforeMethod
 	public void locateElement() {
 		email = driver.findElement(By.id("email"));
-		email.clear();
 		pass = driver.findElement(By.id("password"));
-		pass.clear();
 		signin = driver.findElement(By.id("submit"));
 	}
 	
 	@Test(dataProvider = "loginData")
 	public void doLogin(String testName, String uName, String uPass) {
 		tName = testName;
-		email.sendKeys(uName);
-		pass.sendKeys(uPass);
-		signin.click();
+		cf.enterValueIntoTextBox(email, uName);
+		cf.enterValueIntoTextBox(pass, uPass);
+		cf.clickOnButton(signin);
 	}
 	
 	@AfterMethod
@@ -43,13 +40,13 @@ public class LoginTest extends BaseIntegration{
 		}else {
 			expResult = loginPageTitle;
 		}
-		Assert.assertEquals(actResult, expResult);
+		cf.doAssert(actResult, actResult);
 		Thread.sleep(2000);
 	}
 	
 	public void doLogout() {
 		logout = driver.findElement(By.id("hlogout"));
-		logout.click();
+		cf.clickOnButton(logout);
 	}
 	
 	@AfterSuite
