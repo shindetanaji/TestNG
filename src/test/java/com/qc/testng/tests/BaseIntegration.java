@@ -11,6 +11,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.DataProvider;
 
+import com.qc.testng.utils.CommonFeature;
 import com.qc.testng.utils.TestUtils;
 
 public class BaseIntegration {
@@ -22,6 +23,7 @@ public class BaseIntegration {
 	TestUtils test = new TestUtils();
 	String tName, actResult, expResult;
 	String loginPageTitle = "Queue Codes | Log in";
+	CommonFeature cf = new CommonFeature();
 	
 	public void doSetup() throws IOException {
 		prop = test.readProp();
