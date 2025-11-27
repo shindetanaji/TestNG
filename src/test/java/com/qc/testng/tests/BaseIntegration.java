@@ -19,11 +19,11 @@ public class BaseIntegration {
 
 	WebDriver driver;
 	WebElement email, pass, signin, logout;
+	WebElement rLink, rName, rMobile, rEmail, rPass, rSubmit;
 	Properties prop;
 	String tName;
 	TestUtil test = new TestUtil();
 	
-	@BeforeSuite
 	public void doSetup() throws IOException {
 		prop = test.readProp();
 		if(prop.getProperty("browser").equals("chrome")) {
@@ -44,8 +44,9 @@ public class BaseIntegration {
 		return test.readExcelData("Sheet1");
 	}
 	
-	@AfterSuite
-	public void tearDown() {
-		driver.quit();
+	@DataProvider
+	public Object[][] registerData() throws IOException{
+		return test.readExcelData("Sheet2");
 	}
+	
 }

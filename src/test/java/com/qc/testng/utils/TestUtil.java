@@ -9,6 +9,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.WebDriver;
 
 public class TestUtil {
 
@@ -17,6 +19,13 @@ public class TestUtil {
 		Properties prop = new Properties();
 		prop.load(fis);
 		return prop;
+	}
+	
+	public String handleAlert(WebDriver driver) {
+		Alert alt = driver.switchTo().alert();
+		String altText = alt.getText();
+		alt.accept();
+		return altText;
 	}
 
 	public Object[][] readExcelData(String sheetName) throws IOException {

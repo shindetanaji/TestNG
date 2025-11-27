@@ -1,12 +1,21 @@
 package com.qc.testng.tests;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseIntegration{
+	
+	@BeforeSuite
+	public void setup() throws IOException {
+		doSetup();
+	}
 	
 	@BeforeMethod
 	public void loacteElement() {
@@ -42,5 +51,10 @@ public class LoginTest extends BaseIntegration{
 	public void doLogout() {
 		logout = driver.findElement(By.id("hlogout"));
 		logout.click();
+	}
+	
+	@AfterSuite
+	public void tearDown() {
+		driver.quit();
 	}
 }
